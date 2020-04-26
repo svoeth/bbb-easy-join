@@ -142,12 +142,12 @@ app.post('/easy', async function (req, res) {
   }
 
   //slugify roomName because room contains prefix
-  res.redirect('/easy/' + room )
+  res.redirect('/easy/' + slugify(roomName, { lower: true }))
 })
 
 app.get('/easy/:room', async function (req, res){
   // added slugify lower to prevent error if accidental uppercase or special characters are in adress
-  //easy-prefix is used to only handle rooms created by this frontend
+  // easy-prefix is used to only handle rooms created by this frontend
   var room = "easy-" + slugify(req.params.room, { lower: true })
   var info = await getMeetingInfo(room)
 
